@@ -1,0 +1,21 @@
+<RCC>
+    <qresource prefix="/">
+        <file>resource/qml/Clients_header.qml</file>
+        <file>resource/qml/Dialog1.qml</file>
+        <file>resource/qml/Dialog2.qml</file>
+        <file>resource/qml/Filemanager.qml</file>
+        <file>resource/qml/Main.qml</file>
+        <file>resource/qml/ShellWindow.qml</file>
+        <file>resource/qml/ShowPrompt.qml</file>
+        <file>resource/icons/archive-icon.png</file>
+        <file>resource/icons/back-icon.png</file>
+        <file>resource/icons/directory-icon.png</file>
+        <file>resource/icons/doc-icon.png</file>
+        <file>resource/icons/exe-icon.png</file>
+        <file>resource/icons/image-icon.png</file>
+        <file>resource/icons/file-icon.png</file>
+        <file>resource/icons/xls-icon.png</file>
+        <file>resource/icons/pdf-icon.png</file>
+        <file>resource/icons/ppt-icon.png</file>
+    </qresource>
+</RCC>
