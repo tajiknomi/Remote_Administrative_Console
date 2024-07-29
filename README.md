@@ -47,6 +47,11 @@ This is a server application that requires a client to interact with it. To eval
 
 Detail usage will be shown via video [to be uploaded soon].
 
+**Technology Stack:**
+* Qt
+* C++
+* QML
+
 ## Contributing
 
 Pull requests are welcome. For major changes, please open an issue first
