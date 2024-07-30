@@ -16,7 +16,7 @@
 // AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-// SOFTWARE. 1 
+// SOFTWARE.
 
 
 #include "configurationManager.h"
@@ -35,8 +35,8 @@ ConfigurationManager::ConfigurationManager(QObject *parent) : QObject(parent){
         bool isConfigFileAvailable = readConfigFile(configFileName);
 
         if(isConfigFileAvailable == false){    // If config file is not available, switch to default configuration
-            printError("Couldn't find configuration file, Make sure to place " + configFileName + " in the executable directory");
-            qDebug() << "Back to default configuration . . .";
+            //printError("Couldn't find configuration file, Make sure to place " + configFileName + " in the executable directory");
+            qDebug() << "Default configuration is set-up";
             setDefaultConfiguration();
         }
 

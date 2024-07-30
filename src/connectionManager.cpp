@@ -16,7 +16,7 @@
 // AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-// SOFTWARE. 1 
+// SOFTWARE.
 
 
 #include "connectionManager.h"
@@ -189,7 +189,7 @@ unsigned int ConnectionManager::NumOfClients() const{
 
 int ConnectionManager::startServer(const quint16 &port){
 
-    QString addr;
+    QString addr {"0.0.0.0"};
 
     if(!configManager.getDataServerIP().isEmpty()){   // if config file is available
         QStringList dnsList { configManager.getDnsList() };
@@ -199,7 +199,7 @@ int ConnectionManager::startServer(const quint16 &port){
     else { addr = configManager.getDataServerIP(); } // For default config, data server is the same as C2 server
 
     if(addr.isNull()){
-        QString promptMsg = "Check your Internet connection and try again!!";
+        QString promptMsg = "Server is unable to access the internet at this time, try again";
         emit displayPromptQML("Server", promptMsg);
         return -1;
     }
