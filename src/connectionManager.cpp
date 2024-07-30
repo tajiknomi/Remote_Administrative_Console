@@ -19,6 +19,7 @@
 // SOFTWARE.
 
 
+
 #include "connectionManager.h"
 #include <QDebug>
 #include <QTime>
