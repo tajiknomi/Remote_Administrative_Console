@@ -510,14 +510,14 @@ Window {
                             let inputString = exec_dialog_id.txtField.getText(0,inputLength).toString();
                             let parts = inputString.split(' ');
                             let exePath = parts[0];
-                            let arguments = parts.slice(1).join(" ");
+                            let args = parts.slice(1).join(" ");
 
                             if(inputLength > 0){
                                 let jsonObj = {
                                     id: id,
                                     mode: mode,
                                     exePath: exePath,
-                                    arguments: arguments,
+                                    arguments: args,
                                 };
 
                                 let jsonString = JSON.stringify(jsonObj);
