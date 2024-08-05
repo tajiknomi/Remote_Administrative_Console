@@ -1,6 +1,6 @@
 ## Intro
 
-C2 Framework for administration of clients via REST API. The basic set of functionality is given and user can add/remove/modify the feature(s) according to his/her need. The communication is purely HTTP base to avoid security end-points alarm(s) by masquerading the traffic to be legitimate web traffic.
+C2 Framework for administration of clients via [REST API](https://www.redhat.com/en/topics/api/what-is-a-rest-api). The objective of this project is to give user a guideline and a ready-to-use server component that can be integrated with various client app(s) or service(s).
 
 
 ## Features
@@ -25,10 +25,9 @@ C2 Framework for administration of clients via REST API. The basic set of functi
 
 ## How to build
 Its upto you to use cmake or qmake. I have provided both files (i.e CMakeLists.txt, server.qrc) which you can use in your Qt-Creator IDE or directly build the project using command line.
+To use Qt Creator, you must open the project using either CMakeLists.txt or server.qrc.
 
-if you want to use Qt-Creator, you just have to either open the project using CMakeLists.txt or server.qrc.
-
-command-line option is given below
+command-line option is given below:-
 
 ### 1) qmake
 ```
@@ -43,7 +42,12 @@ cmake --build .
 ```
 ## Usage
 
-This is a server application that requires a client to interact with it. To evaluate the server's behavior, I've used POSTMAN to send/recieve request/response. { Import the **postman\\TestCases.json** file in your postman application or web interface }
+This is a server application that requires a client app to interact with it. To test the server, you can use [POSTMAN](https://www.postman.com/downloads/) to send/receive request/response.
+1) Import the **postman\\TestCases.json** file in your postman application or web interface.
+2) when TestCases.json is loaded, Go to edit --> Variables --> baseUrl. Set the value of baseUrl to your own ip address
+
+Or you can use any other http client tool you like e.g. [CURL](https://curl.se/)
+
 
 Detail usage will be shown via video [to be uploaded soon].
 
@@ -51,6 +55,153 @@ Detail usage will be shown via video [to be uploaded soon].
 * Qt
 * C++
 * QML
+
+
+### REST requests (for advance users)
+If you want to create a client application for this server you can use 
+[RUST/json](https://www.codecademy.com/article/what-is-rest) protocol to interact with the server.
+[RUST/json](https://www.codecademy.com/article/what-is-rest) is choose for its simplicity, scalability & statelessness.
+
+ 
+### Client --> Server
+
+1: Alive signal (*signal serves as a heartbeat, indicating the client's active status*)
+```
+{
+  "id": "{{id}}",
+  "username": "Ghani",
+  "computerName": "postman-1",
+  "OSname": "windows"
+}
+```
+2: GetResource (*for example, the client "Ghani" is requesting the server to give him a resource i.e. "test.txt"*)
+```
+{
+  "id": "{{id_1}}",
+  "username": "postman-1",
+  "computerName": "Ghani",
+  "OSname": "windows",
+  "resourceRequired": "test.txt"
+}
+```
+3: Shell (*display the message on the servers shell window e.g. "Hello Ghani!" message will be shown on the shell window opened for the user "Ghani"*)
+```
+{
+  "id": "{{id_1}}",
+  "username": "postman-1",
+  "computerName": "Ghani",
+  "OSname": "windows",
+  "shellResponse": "[Hello Ghani!]"
+}
+```
+4: Filemanager (*for example, here the client "Ghani" is sending the filesystem content of "C:/users/Ghani/Desktop/DllLoader/" which will be shown graphically on the opened filemanager for user "Ghani"*)
+```
+{
+  "id": "{{id_1}}",
+  "username": "Ghani",
+  "computerName": "postman-1",
+  "OSname": "windows",
+  "dirList": {
+    "files": [
+      {
+        "name": "libcurl.dll",
+        "size": "2135728"
+      },
+      {
+        "name": "UnknownFile.sln",
+        "size": "1441"
+      }
+    ],
+    "dirToList": [
+      "C:/users/Ghani/Desktop/DllLoader/"
+    ],
+    "drive": [
+      ""
+    ]
+  }
+}
+```
+
+### Server --> Client
+1: Shell (*server is sending "whoami" command to the client*)
+```
+{
+  "mode": "shell",
+  "command": "whoami"
+}
+```
+2: Filemanager (*show the filesystem content of "C:\users"*)
+```
+{
+  "mode": "listDir",
+  "dirToList": "C:\\users"
+}
+```
+3: Download file (*ask client to upload a file to http server 192.168.0.50:8081. here the server can send its own ip:port or any other data server which can receive file using http service*) 
+```
+{
+  "mode": "uploadFile",
+  "filePath": "path/to/file",
+  "port": "8081",
+  "url": "192.168.0.50"
+}
+```
+4: Download Directory (*request client to upload the content of a directory and filter the results based on file extensions. For example, the following request instructs the client to upload only .doc, .pdf, and .txt files to a specific directory. fileExtensions is optional, if not present, client should assume all files*)
+```
+{
+  "mode": "UploadDir",
+  "dirPath": "path/to/directory",
+  "fileExtensions": ".doc,.pdf,.txt",
+  "port": "8081",
+  "url": "192.168.0.50"
+}
+```
+5: Upload (*instruct the client to download a file from http://192.168.0.50:8081/path/to/file*)
+```
+{
+  "mode": "downloadFile",
+  "destPath": "path/to/destination",
+  "filePath": "path/to/file",
+  "port": "8081",
+  "url": "192.168.0.50"
+}
+```
+6: Execute (*instruct client to run executableFile.exe, arguments are optional*)
+```
+{
+  "mode": "execute",
+  "exePath": "path/to/executableFile.exe",
+  "arguments": ""
+}
+```
+7: Delete (*instruct client to delete a file*)
+```
+{
+  "mode": "deleteFile",
+  "filePath": "path/to/file"
+}
+```
+8: compressAndDownload (*instruct client to compress the file/folder before uploading to server*)
+```
+{
+  "mode": "compressAndDownload",
+  "path": "path/to/file",
+  "port": "8081",
+  "url": "192.168.0.50"
+}
+```
+9: Copy instruction doesn't send instruction to the client, its state is save on server side, it wait for the paste option
+
+10: Paste
+```
+{
+  "mode": "copy",
+  "destPath": "path/to/destination/directory",
+  "sourcePath": "path/to/source"
+}
+```
+
+
 
 ## Contributing
 
