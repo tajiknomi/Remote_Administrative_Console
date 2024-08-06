@@ -44,11 +44,13 @@ cmake --build .
 ```
 ## Usage
 
-This is a server application that requires a client app to interact with it. To test the server, you can use [POSTMAN](https://www.postman.com/downloads/) to send/receive request/response.
-1) Import the **postman\\TestCases.json** file in your postman application or web interface.
-2) when TestCases.json is loaded, Go to edit --> Variables --> baseUrl. Set the value of baseUrl to your own ip address
+This app acts like a webserver API so you can use any tool which can interact with web-api like [POSTMAN](https://www.postman.com/downloads/), [HTTPie](https://httpie.io/), [CURL](https://curl.se/) or you can make your own client app/service like C++ based [windows](https://github.com/tajiknomi/ClientHTTP_windows) or [Linux](https://github.com/tajiknomi/ClientHTTP_linux) client.
 
-Or you can use any other http client tool you like e.g. [CURL](https://curl.se/)
+For simplicity i have created test-cases for [POSTMAN](https://www.postman.com/downloads/) i.e. "postman\TestCases.json". To use the compiled testcases, you can:-
+1) Import the **postman\\TestCases.json** in your postman app or its web-interface.
+2) edit --> Variables --> baseUrl. Set the value of baseUrl to your own ip address.
+3) Open the server application and click on the "LISTEN" button.
+4) Now you can send request(s) from postman to the server.
 
 
 Detail usage will be shown via video [to be uploaded soon].
