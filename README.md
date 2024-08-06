@@ -3,6 +3,8 @@
 C2 Framework for administration of clients via [REST API](https://www.redhat.com/en/topics/api/what-is-a-rest-api). The objective of this project is to give user a guideline and a ready-to-use server component that can be integrated with various client app(s) or service(s).
 
 
+![Alt text](/screenshots/2.JPG?raw=true "Optional Title")
+
 ## Features
 **1: System Information:** Gain insights into the system by viewing details like operating system, hardware specifications, and software versions.
 
