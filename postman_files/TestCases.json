@@ -1,0 +1,1182 @@
+{
+	"info": {
+		"_postman_id": "cd379f59-1d2c-4e0b-8567-99865bfc5c10",
+		"name": "ServerQT_TestCases",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31634253"
+	},
+	"item": [
+		{
+			"name": "Alive: Ghani",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var btoa = require('btoa');\r",
+							"\r",
+							"// Resolve variables in the request body\r",
+							"var resolvedRequestBody = pm.variables.replaceIn(pm.request.body.raw);\r",
+							"\r",
+							"// Encode the resolved request body to Base64\r",
+							"var base64String = btoa(resolvedRequestBody);\r",
+							"\r",
+							"// Set the Base64-encoded string as the request body\r",
+							"pm.request.body.raw = base64String;\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var atob = require('atob');\r",
+							"\r",
+							"// Get the response body\r",
+							"var responseBody = pm.response.text();\r",
+							"\r",
+							"// Decode the Base64-encoded response body\r",
+							"var decodedBody = atob(responseBody);\r",
+							"\r",
+							"// Log the ASCII representation of the decoded response body\r",
+							"console.log('Decoded ASCII representation:', decodedBody);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept-encoding": true,
+					"connection": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Encoding",
+						"value": "base64",
+						"type": "text"
+					},
+					{
+						"key": "Accept-Encoding",
+						"value": "base64",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\":\"{{id_1}}\",\r\n    \"username\":\"Ghani\",\r\n    \"computerName\":\"postman-1\",\r\n    \"OSname\":\"windows\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}",
+					"host": [
+						"{{baseUrl}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Alive: Brekhna",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var btoa = require('btoa');\r",
+							"\r",
+							"// Resolve variables in the request body\r",
+							"var resolvedRequestBody = pm.variables.replaceIn(pm.request.body.raw);\r",
+							"\r",
+							"// Encode the resolved request body to Base64\r",
+							"var base64String = btoa(resolvedRequestBody);\r",
+							"\r",
+							"// Set the Base64-encoded string as the request body\r",
+							"pm.request.body.raw = base64String;\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var atob = require('atob');\r",
+							"\r",
+							"// Get the response body\r",
+							"var responseBody = pm.response.text();\r",
+							"\r",
+							"// Decode the Base64-encoded response body\r",
+							"var decodedBody = atob(responseBody);\r",
+							"\r",
+							"// Log the ASCII representation of the decoded response body\r",
+							"console.log('Decoded ASCII representation:', decodedBody);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept-encoding": true,
+					"connection": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Encoding",
+						"value": "base64",
+						"type": "text"
+					},
+					{
+						"key": "Accept-Encoding",
+						"value": "base64",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\":\"{{id_2}}\",\r\n    \"username\":\"Brekhna\",\r\n    \"computerName\":\"postman-2\",\r\n    \"OSname\":\"FreeBSD\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}",
+					"host": [
+						"{{baseUrl}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Alive: Malang",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var btoa = require('btoa');\r",
+							"\r",
+							"// Resolve variables in the request body\r",
+							"var resolvedRequestBody = pm.variables.replaceIn(pm.request.body.raw);\r",
+							"\r",
+							"// Encode the resolved request body to Base64\r",
+							"var base64String = btoa(resolvedRequestBody);\r",
+							"\r",
+							"// Set the Base64-encoded string as the request body\r",
+							"pm.request.body.raw = base64String;\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var atob = require('atob');\r",
+							"\r",
+							"// Get the response body\r",
+							"var responseBody = pm.response.text();\r",
+							"\r",
+							"// Decode the Base64-encoded response body\r",
+							"var decodedBody = atob(responseBody);\r",
+							"\r",
+							"// Log the ASCII representation of the decoded response body\r",
+							"console.log('Decoded ASCII representation:', decodedBody);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept-encoding": true,
+					"connection": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Encoding",
+						"value": "base64",
+						"type": "text"
+					},
+					{
+						"key": "Accept-Encoding",
+						"value": "base64",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\":\"{{id_3}}\",\r\n    \"username\":\"Malang\",\r\n    \"computerName\":\"postman-3\",\r\n    \"OSname\":\"fedora\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}",
+					"host": [
+						"{{baseUrl}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Alive:Ranrha",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var btoa = require('btoa');\r",
+							"\r",
+							"// Resolve variables in the request body\r",
+							"var resolvedRequestBody = pm.variables.replaceIn(pm.request.body.raw);\r",
+							"\r",
+							"// Encode the resolved request body to Base64\r",
+							"var base64String = btoa(resolvedRequestBody);\r",
+							"\r",
+							"// Set the Base64-encoded string as the request body\r",
+							"pm.request.body.raw = base64String;\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var atob = require('atob');\r",
+							"\r",
+							"// Get the response body\r",
+							"var responseBody = pm.response.text();\r",
+							"\r",
+							"// Decode the Base64-encoded response body\r",
+							"var decodedBody = atob(responseBody);\r",
+							"\r",
+							"// Log the ASCII representation of the decoded response body\r",
+							"console.log('Decoded ASCII representation:', decodedBody);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept-encoding": true,
+					"connection": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Encoding",
+						"value": "base64",
+						"type": "text"
+					},
+					{
+						"key": "Accept-Encoding",
+						"value": "base64",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\":\"{{id_4}}\",\r\n    \"username\":\"Ranrha\",\r\n    \"computerName\":\"postman-4\",\r\n    \"OSname\":\"macOS X\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}",
+					"host": [
+						"{{baseUrl}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Alive: John",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var btoa = require('btoa');\r",
+							"\r",
+							"// Resolve variables in the request body\r",
+							"var resolvedRequestBody = pm.variables.replaceIn(pm.request.body.raw);\r",
+							"\r",
+							"// Encode the resolved request body to Base64\r",
+							"var base64String = btoa(resolvedRequestBody);\r",
+							"\r",
+							"// Set the Base64-encoded string as the request body\r",
+							"pm.request.body.raw = base64String;\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var atob = require('atob');\r",
+							"\r",
+							"// Get the response body\r",
+							"var responseBody = pm.response.text();\r",
+							"\r",
+							"// Decode the Base64-encoded response body\r",
+							"var decodedBody = atob(responseBody);\r",
+							"\r",
+							"// Log the ASCII representation of the decoded response body\r",
+							"console.log('Decoded ASCII representation:', decodedBody);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept-encoding": true,
+					"connection": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Encoding",
+						"value": "base64",
+						"type": "text"
+					},
+					{
+						"key": "Accept-Encoding",
+						"value": "base64",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\":\"{{id_5}}\",\r\n    \"username\":\"John\",\r\n    \"computerName\":\"postman-5\",\r\n    \"OSname\":\"android\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}",
+					"host": [
+						"{{baseUrl}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "FetchInstruction: Ghani",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var btoa = require('btoa');\r",
+							"\r",
+							"// Resolve variables in the request body\r",
+							"var resolvedRequestBody = pm.variables.replaceIn(pm.request.body.raw);\r",
+							"\r",
+							"// Encode the resolved request body to Base64\r",
+							"var base64String = btoa(resolvedRequestBody);\r",
+							"\r",
+							"// Set the Base64-encoded string as the request body\r",
+							"pm.request.body.raw = base64String;"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var atob = require('atob');\r",
+							"\r",
+							"// Get the response body\r",
+							"var responseBody = pm.response.text();\r",
+							"\r",
+							"// Decode the Base64-encoded response body\r",
+							"var decodedBody = atob(responseBody);\r",
+							"\r",
+							"// Log the ASCII representation of the decoded response body\r",
+							"console.log('Decoded ASCII representation:', decodedBody);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept-encoding": true,
+					"connection": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Encoding",
+						"value": "base64",
+						"type": "text"
+					},
+					{
+						"key": "Accept-Encoding",
+						"value": "base64",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\":\"{{id_1}}\",\r\n    \"username\":\"postman-1\",\r\n    \"computerName\":\"Ghani\",\r\n    \"OSname\":\"windows\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}",
+					"host": [
+						"{{baseUrl}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "FetchInstruction: Brekha",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var btoa = require('btoa');\r",
+							"\r",
+							"// Resolve variables in the request body\r",
+							"var resolvedRequestBody = pm.variables.replaceIn(pm.request.body.raw);\r",
+							"\r",
+							"// Encode the resolved request body to Base64\r",
+							"var base64String = btoa(resolvedRequestBody);\r",
+							"\r",
+							"// Set the Base64-encoded string as the request body\r",
+							"pm.request.body.raw = base64String;"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var atob = require('atob');\r",
+							"\r",
+							"// Get the response body\r",
+							"var responseBody = pm.response.text();\r",
+							"\r",
+							"// Decode the Base64-encoded response body\r",
+							"var decodedBody = atob(responseBody);\r",
+							"\r",
+							"// Log the ASCII representation of the decoded response body\r",
+							"console.log('Decoded ASCII representation:', decodedBody);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept-encoding": true,
+					"connection": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Encoding",
+						"value": "base64",
+						"type": "text"
+					},
+					{
+						"key": "Accept-Encoding",
+						"value": "base64",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\":\"{{id_2}}\",\r\n    \"username\":\"postman-2\",\r\n    \"computerName\":\"Brekhna\",\r\n    \"OSname\":\"FreeBSD\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}",
+					"host": [
+						"{{baseUrl}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetResource: Ghani",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var atob = require('atob');\r",
+							"\r",
+							"// Get the response body\r",
+							"var responseBody = pm.response.text();\r",
+							"\r",
+							"// Decode the Base64-encoded response body\r",
+							"var decodedBody = atob(responseBody);\r",
+							"\r",
+							"// Log the ASCII representation of the decoded response body\r",
+							"console.log('Decoded ASCII representation:', decodedBody);\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var btoa = require('btoa');\r",
+							"\r",
+							"// Resolve variables in the request body\r",
+							"var resolvedRequestBody = pm.variables.replaceIn(pm.request.body.raw);\r",
+							"\r",
+							"// Encode the resolved request body to Base64\r",
+							"var base64String = btoa(resolvedRequestBody);\r",
+							"\r",
+							"// Set the Base64-encoded string as the request body\r",
+							"pm.request.body.raw = base64String;"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"connection": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Encoding",
+						"value": "base64",
+						"type": "text"
+					},
+					{
+						"key": "Accept-Encoding",
+						"value": "base64",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\":\"{{id_1}}\",\r\n    \"username\":\"postman-1\",\r\n    \"computerName\":\"Ghani\",\r\n    \"OSname\":\"windows\",\r\n    \"resourceRequired\":\"test.txt\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}",
+					"host": [
+						"{{baseUrl}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetResource: Brekhna",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var atob = require('atob');\r",
+							"\r",
+							"// Get the response body\r",
+							"var responseBody = pm.response.text();\r",
+							"\r",
+							"// Decode the Base64-encoded response body\r",
+							"var decodedBody = atob(responseBody);\r",
+							"\r",
+							"// Log the ASCII representation of the decoded response body\r",
+							"console.log('Decoded ASCII representation:', decodedBody);\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var btoa = require('btoa');\r",
+							"\r",
+							"// Resolve variables in the request body\r",
+							"var resolvedRequestBody = pm.variables.replaceIn(pm.request.body.raw);\r",
+							"\r",
+							"// Encode the resolved request body to Base64\r",
+							"var base64String = btoa(resolvedRequestBody);\r",
+							"\r",
+							"// Set the Base64-encoded string as the request body\r",
+							"pm.request.body.raw = base64String;"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept-encoding": true,
+					"connection": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Encoding",
+						"value": "base64",
+						"type": "text"
+					},
+					{
+						"key": "Accept-Encoding",
+						"value": "base64",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\":\"{{id_2}}\",\r\n    \"username\":\"postman\",\r\n    \"computerName\":\"Brekhna\",\r\n    \"OSname\":\"FreeBSD\",\r\n    \"resourceRequired\":\"test2\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}",
+					"host": [
+						"{{baseUrl}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Shell output: Ghani",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var atob = require('atob');\r",
+							"\r",
+							"// Get the response body\r",
+							"var responseBody = pm.response.text();\r",
+							"\r",
+							"// Decode the Base64-encoded response body\r",
+							"var decodedBody = atob(responseBody);\r",
+							"\r",
+							"// Log the ASCII representation of the decoded response body\r",
+							"console.log('Decoded ASCII representation:', decodedBody);\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var btoa = require('btoa');\r",
+							"\r",
+							"// Resolve variables in the request body\r",
+							"var resolvedRequestBody = pm.variables.replaceIn(pm.request.body.raw);\r",
+							"\r",
+							"// Encode the resolved request body to Base64\r",
+							"var base64String = btoa(resolvedRequestBody);\r",
+							"\r",
+							"// Set the Base64-encoded string as the request body\r",
+							"pm.request.body.raw = base64String;"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept-encoding": true,
+					"connection": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Encoding",
+						"value": "base64",
+						"type": "text"
+					},
+					{
+						"key": "Accept-Encoding",
+						"value": "base64",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\":\"{{id_1}}\",\r\n    \"username\":\"postman-1\",\r\n    \"computerName\":\"Ghani\",\r\n    \"OSname\":\"windows\",\r\n    \"shellResponse\":\"[YOU WILL SEE THIS MESSAGE IN SHELL WINDOW]\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}",
+					"host": [
+						"{{baseUrl}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Shell output: Brekhna",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var atob = require('atob');\r",
+							"\r",
+							"// Get the response body\r",
+							"var responseBody = pm.response.text();\r",
+							"\r",
+							"// Decode the Base64-encoded response body\r",
+							"var decodedBody = atob(responseBody);\r",
+							"\r",
+							"// Log the ASCII representation of the decoded response body\r",
+							"console.log('Decoded ASCII representation:', decodedBody);\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var btoa = require('btoa');\r",
+							"\r",
+							"// Resolve variables in the request body\r",
+							"var resolvedRequestBody = pm.variables.replaceIn(pm.request.body.raw);\r",
+							"\r",
+							"// Encode the resolved request body to Base64\r",
+							"var base64String = btoa(resolvedRequestBody);\r",
+							"\r",
+							"// Set the Base64-encoded string as the request body\r",
+							"pm.request.body.raw = base64String;"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept-encoding": true,
+					"connection": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Encoding",
+						"value": "base64",
+						"type": "text"
+					},
+					{
+						"key": "Accept-Encoding",
+						"value": "base64",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\":\"{{id_2}}\",\r\n  \"username\":\"postman\",\r\n  \"computerName\":\"Brekhna\",\r\n  \"OSname\":\"FreeBSD\",\r\n  \"shellResponse\":\"total 1292\\ndrwxr-xr-x 158 root     root     12288 Aug  6 00:26 .\\ndrwxr-xr-x  19 root     root     36864 Jul 27  2020 ..\\n-rw-r--r--   1 root     root      2981 Jul 27  2020 adduser.conf\\n-rw-r--r--   1 root     root        44 Jul 27  2020 adjtime\\ndrwxr-xr-x   3 root     root      4096 Jul 27  2020 alsa\\ndrwxr-xr-x   2 root     root     20480 Jul 27  2020 alternatives\\ndrwxr-xr-x   8 root     root      4096 Jul 27  2020 apache2\\ndrwxr-xr-x   3 root     root      4096 Jul 27  2020 apparmor\\ndrwxr-xr-x   8 root     root      4096 Jul 27  2020 apparmor.d\\ndrwxr-xr-x   7 root     root      4096 Jul 27  2020 apt\\ndrwxr-xr-x   3 root     root      4096 Jul 27  2020 avahi\\n-rw-r--r--   1 root     root      1994 Feb 25  2020 bash.bashrc\\n-rw-r--r--   1 root     root        45 Jan 24  2020 bash_completion\\ndrwxr-xr-x   2 root     root      4096 Jul 27  2020 bash_completion.d\\n-rw-r--r--   1 root     root       367 Mar 12  2020 bindresvport.blacklist\\ndrwxr-xr-x   2 root     root      4096 Jul  5  2020 binfmt.d\\ndrwxr-xr-x   2 root     root      4096 Jul 27  2020 bluetooth\\ndrwxr-xr-x   3 root     root      4096 Jul 27  2020 ca-certificates\\n-rw-r--r--   1 root     root      5434 Jul 27  2020 ca-certificates.conf\\ndrwxr-s---   2 root     dip       4096 Jul 27  2020 chatscripts\\ndrwxr-xr-x   2 root     root      4096 Jul 27  2020 cifs-utils\\ndrwxr-xr-x   3 root     root      4096 Jul 27  2020 cloud\\ndrwxr-xr-x   2 root     root      4096 Jul 27  2020 console-setup\\n\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}",
+					"host": [
+						"{{baseUrl}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "filemanager: Ghani",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var atob = require('atob');\r",
+							"\r",
+							"// Get the response body\r",
+							"var responseBody = pm.response.text();\r",
+							"\r",
+							"// Decode the Base64-encoded response body\r",
+							"var decodedBody = atob(responseBody);\r",
+							"\r",
+							"// Log the ASCII representation of the decoded response body\r",
+							"console.log('Decoded ASCII representation:', decodedBody);\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var btoa = require('btoa');\r",
+							"\r",
+							"// Resolve variables in the request body\r",
+							"var resolvedRequestBody = pm.variables.replaceIn(pm.request.body.raw);\r",
+							"\r",
+							"// Encode the resolved request body to Base64\r",
+							"var base64String = btoa(resolvedRequestBody);\r",
+							"\r",
+							"// Set the Base64-encoded string as the request body\r",
+							"pm.request.body.raw = base64String;"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept-encoding": true,
+					"connection": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Encoding",
+						"value": "base64",
+						"type": "text"
+					},
+					{
+						"key": "Accept-Encoding",
+						"value": "base64",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\":\"{{id_1}}\",\r\n    \"username\":\"Ghani\",\r\n    \"computerName\":\"postman-1\",\r\n    \"OSname\":\"windows\",\r\n    \"dirList\":{\r\n        \"files\":[\r\n            {\r\n                \"name\": \"libcurl.dll\",\r\n                \"size\": \"2135728\"\r\n            },\r\n            {\r\n                \"name\": \"reports.doc\",\r\n                \"size\": \"3145728\"\r\n            },\r\n            {\r\n                \"name\": \"resume.pdf\",\r\n                \"size\": \"2148728\"\r\n            },\r\n            {\r\n                \"name\": \"tables.xlsx\",\r\n                \"size\": \"1,048,576\"\r\n            },\r\n            {\r\n                \"name\": \"archive.rar\",\r\n                \"size\": \"60487576\"\r\n            },\r\n            {\r\n                \"name\": \"program.exe\",\r\n                \"size\": \"190487576\"\r\n            },\r\n            {\r\n                \"name\": \"Directory/\",\r\n                \"size\": \"N/A\"\r\n            },\r\n            {\r\n                \"name\": \"compressedFiles.zip\",\r\n                \"size\": \"451441\"\r\n            },\r\n            {\r\n                \"name\": \"UnknownFile.sln\",\r\n                \"size\": \"1441\"\r\n            }\r\n        ],\r\n        \"dirToList\": [\r\n            \"C:/users/Ghani/Desktop/DllLoader/\"\r\n        ],\r\n        \"drive\": [\r\n            \"\"\r\n        ]\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}",
+					"host": [
+						"{{baseUrl}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "filemanager: Brekhna",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var atob = require('atob');\r",
+							"\r",
+							"// Get the response body\r",
+							"var responseBody = pm.response.text();\r",
+							"\r",
+							"// Decode the Base64-encoded response body\r",
+							"var decodedBody = atob(responseBody);\r",
+							"\r",
+							"// Log the ASCII representation of the decoded response body\r",
+							"console.log('Decoded ASCII representation:', decodedBody);\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var btoa = require('btoa');\r",
+							"\r",
+							"// Resolve variables in the request body\r",
+							"var resolvedRequestBody = pm.variables.replaceIn(pm.request.body.raw);\r",
+							"\r",
+							"// Encode the resolved request body to Base64\r",
+							"var base64String = btoa(resolvedRequestBody);\r",
+							"\r",
+							"// Set the Base64-encoded string as the request body\r",
+							"pm.request.body.raw = base64String;"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept-encoding": true,
+					"connection": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Encoding",
+						"value": "base64",
+						"type": "text"
+					},
+					{
+						"key": "Accept-Encoding",
+						"value": "base64",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\":\"{{id_2}}\",\r\n    \"username\":\"Brekhna\",\r\n    \"computerName\":\"postman-2\",\r\n    \"OSname\":\"FreeBSD\",\r\n    \"dirList\":{\r\n        \"files\":[\r\n            {\r\n                \"name\": \".vs/\",\r\n                \"size\": \"N/A\"\r\n            },\r\n            {\r\n                \"name\": \"Debug/\",\r\n                \"size\": \"N/A\"\r\n            },\r\n            {\r\n                \"name\": \"DllLoader/\",\r\n                \"size\": \"N/A\"\r\n            },\r\n            {\r\n                \"name\": \"DllLoader.sln\",\r\n                \"size\": \"1441\"\r\n            },\r\n            {\r\n                \"name\": \"Release/\",\r\n                \"size\": \"N/A\"\r\n            }\r\n        ],\r\n        \"dirToList\": [\r\n            \"C:/users/Brekhna/Desktop/\"\r\n        ],\r\n        \"drive\": [\r\n            \"\"\r\n        ]\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}",
+					"host": [
+						"{{baseUrl}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "uploadFile",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept-encoding": true,
+					"connection": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Encoding",
+						"value": "base64",
+						"type": "text"
+					},
+					{
+						"key": "Accept-Encoding",
+						"value": "base64",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"description": "Sample File for testing",
+							"type": "file",
+							"src": []
+						}
+					]
+				},
+				"url": {
+					"raw": "{{dataServerUrl}}",
+					"host": [
+						"{{dataServerUrl}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "192.168.1.230"
+		},
+		{
+			"key": "dataServerUrl",
+			"value": "127.0.0.1:8081/dashboard/upload.php",
+			"type": "string"
+		},
+		{
+			"key": "id_1",
+			"value": "sf43rw32gsfg24r34",
+			"type": "string"
+		},
+		{
+			"key": "id_2",
+			"value": "sf43rw32gsfg24r35",
+			"type": "string"
+		},
+		{
+			"key": "id_3",
+			"value": "sf43rw32gsfg24r36",
+			"type": "string"
+		},
+		{
+			"key": "id_4",
+			"value": "sf43rw32gsfg24r37",
+			"type": "string"
+		},
+		{
+			"key": "id_5",
+			"value": "sf43rw32gsfg24r38",
+			"type": "string"
+		}
+	]
+}
