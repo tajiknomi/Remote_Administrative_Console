@@ -340,14 +340,14 @@ Window {
                     Action {
                         text: "Shell"
                         onTriggered: {
-                            let mode = "shell";
-                            let exePath = "echo \"Client is ready to recieve commands now\"";
-                            let jsonObj = {
-                                id: modelData.id,
-                                mode: mode,
-                            };
-                            let jsonString = JSON.stringify(jsonObj);
-                            httpServer.registerTaskForClient(jsonString);
+                            // let mode = "shell";
+                            // let exePath = "echo \"Client is ready to recieve commands now\"";
+                            // let jsonObj = {
+                            //     id: modelData.id,
+                            //     mode: mode,
+                            // };
+                            //  let jsonString = JSON.stringify(jsonObj);
+                            //  httpServer.registerTaskForClient(jsonString);
                             createShellWindow(modelData.id, modelData.username);
                         }
                      }
@@ -370,13 +370,15 @@ Window {
 
                     Action { text: "Persist"
                         onTriggered: {
-                            let seperator = "***";
-                            let clientId = list.currentIndex.toString();
-                            let cmd = "persist";
-//                            httpServer.registerTaskForClient(
-//                                        clientId+seperator
-//                                        +cmd
-//                                        );
+                            let mode = "persist";
+                            let method = "";
+                            let jsonObj = {
+                                id: modelData.id,
+                                mode: mode,
+                                method: method,
+                            };
+                            let jsonString = JSON.stringify(jsonObj);
+                            httpServer.registerTaskForClient(jsonString);
                         }
                     }
 
@@ -517,7 +519,7 @@ Window {
                                     id: id,
                                     mode: mode,
                                     exePath: exePath,
-                                    arguments: args,
+                                    exeArguments: args,
                                 };
 
                                 let jsonString = JSON.stringify(jsonObj);

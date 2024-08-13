@@ -107,8 +107,8 @@ void ConnectionManager::onRecvData(QTcpSocket *socket, std::shared_ptr<socketMet
         QString destIp {server.serverAddress().toString()};
         handleClientInstruction(id, sourceIp, destIp, jsonData);
         setClientTimer(id, sourceIp, jsonData);
-
         QString replyToClient = constructResponseToRequest(id);
+
         if(replyToClient.isEmpty()){        // nothing to send to client
             return;
         }
