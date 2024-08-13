@@ -63,8 +63,8 @@ Detail usage will be shown via video [to be uploaded soon].
 
 ### REST requests (for advance users)
 If you want to create a client application for this server you can use 
-[RUST/json](https://www.codecademy.com/article/what-is-rest) protocol to interact with the server.
-[RUST/json](https://www.codecademy.com/article/what-is-rest) is choose for its simplicity, scalability & statelessness.
+[REST/json](https://www.codecademy.com/article/what-is-rest) protocol to interact with the server.
+[REST/json](https://www.codecademy.com/article/what-is-rest) is choose for its simplicity, scalability & statelessness.
 
  
 ### Client --> Server
