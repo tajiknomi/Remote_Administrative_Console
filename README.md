@@ -205,6 +205,9 @@ If you want to create a client application for this server you can use
 }
 ```
 
+### Disclaimer
+This application is designed for personal and administrative use. It is not intended for unauthorized access, data manipulation, or any other malicious activity. Any use of this software for illegal purposes is strictly prohibited. You can use this service in offensive security scenarios on you own machine/network ONLY.
+The author disclaims all liability for any misuse or damage caused by the application. Users are solely responsible for their actions and the consequences thereof.
 
 
 ## Contributing
