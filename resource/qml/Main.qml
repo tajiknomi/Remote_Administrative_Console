@@ -510,8 +510,11 @@ Window {
                             let mode = "execute"
                             let inputLength = exec_dialog_id.txtField.length;
                             let inputString = exec_dialog_id.txtField.getText(0,inputLength).toString();
-                            let parts = inputString.split(' ');
-                            let exePath = parts[0];
+                            // Regular expression to match quoted parts (single or double) or single words
+                            let parts = inputString.match(/(["'])(?:(?=(\\?))\2.)*?\1|\S+/g);
+                            // Remove quotes from the first part (exePath) if present
+                            let exePath = parts[0].replace(/^['"]|['"]$/g, '');
+                            // Join the rest as arguments
                             let args = parts.slice(1).join(" ");
 
                             if(inputLength > 0){

@@ -144,7 +144,6 @@ Window {
                     };
                 }
                 let jsonString = JSON.stringify(jsonObj);
-                console.log(jsonString);                    // DELETE THIS!
                 httpServer.registerTaskForClient(jsonString);
                 cmdInput.clear();
             }

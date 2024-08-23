@@ -26,7 +26,7 @@
 #include "clientlistwrapper.h"
 #include "connectionManager.h"
 
-#define CLIENT_TIMEOUT_SEC 50
+#define CLIENT_TIMEOUT_SEC 5
 
 int main(int argc, char *argv[]){
 
