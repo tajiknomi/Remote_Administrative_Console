@@ -1,11 +1,11 @@
-## Intro
+### Intro
 
 C2 Framework for administration of clients via [REST API](https://www.redhat.com/en/topics/api/what-is-a-rest-api). The objective of this project is to give user a guideline and a ready-to-use server component that can be integrated with various client app(s) or service(s).
 
 
 ![Alt text](/screenshots/2.JPG?raw=true "Optional Title")
 
-## Features
+### Features
 **1: System Information:** Gain insights into the system by viewing details like operating system, hardware specifications, and software versions.
 
 **2: Client Country Information:** Identify the client's country of origin (if applicable).
@@ -25,26 +25,15 @@ C2 Framework for administration of clients via [REST API](https://www.redhat.com
 **9: Logging:** Track client/server activity and events for troubleshooting.
 
 
-## How to build
-Its upto you to use cmake or qmake. I have provided both files (i.e CMakeLists.txt, server.qrc) which you can use in your Qt-Creator IDE or directly build the project using command line.
-To use Qt Creator, you must open the project using either CMakeLists.txt or server.qrc.
+### Usage
+Download the [latest release](https://github.com/tajiknomi/Remote_Administrative_Console/releases) and run the application. This app acts like a webserver API, so you need client app/service to interact with it. You have three options available:-
 
-command-line option is given below:-
+1: You can use my client app/service like C++ based [windows client](https://github.com/tajiknomi/ClientHTTP_windows/releases) / [Linux client](https://github.com/tajiknomi/ClientHTTP_linux/releases).
 
-### 1) qmake
-```
-qmake -makeFile
-make
-```
-### 2) cmake
-```
-mkdir build && cd build;
-cmake ../
-cmake --build .
-```
-## Usage
+2: For testing API, you can use any tool which can interact with web-api like [POSTMAN](https://www.postman.com/downloads/), [HTTPie](https://httpie.io/), [CURL](https://curl.se/).
 
-This app acts like a webserver API so you can use any tool which can interact with web-api like [POSTMAN](https://www.postman.com/downloads/), [HTTPie](https://httpie.io/), [CURL](https://curl.se/) or you can make your own client app/service like C++ based [windows](https://github.com/tajiknomi/ClientHTTP_windows) or [Linux](https://github.com/tajiknomi/ClientHTTP_linux) client.
+3: Create your own app/service to interact with the servcer (by following the [protocol](https://github.com/tajiknomi/Remote_Administrative_Console/edit/main/README.md#rest-requests-for-advance-users) ) 
+
 
 For simplicity i have created test-cases for [POSTMAN](https://www.postman.com/downloads/) i.e. "postman\TestCases.json". To use the compiled testcases, you can:-
 1) Import the **postman\\TestCases.json** in your postman app or its web-interface.
@@ -52,8 +41,25 @@ For simplicity i have created test-cases for [POSTMAN](https://www.postman.com/d
 3) Open the server application and click on the "LISTEN" button.
 4) Now you can send request(s) from postman to the server.
 
+To receive files from clients, set up a web server using [XAMPP](https://www.apachefriends.org/), EasyPHP or WAMPP. Place the *php_script\index.php* script in the 'htdocs' folder of your XAMPP directory and run apache server. Set the data port in GUI to the port you choose for apacher server. Now the clients can send files to the server which will be available in "*path\to\XAMPP\htdocs\ClientData*" directory
 
-Detail usage will be shown via video [to be uploaded soon].
+### How to build
+Its upto you to use cmake or qmake. I have provided both files (i.e CMakeLists.txt, server.qrc) which you can use in your Qt-Creator IDE or directly build the project using command line.
+To use Qt Creator, you must open the project using either CMakeLists.txt or server.qrc.
+
+command-line option is given below:-
+
+#### 1) qmake
+```
+qmake -makeFile
+make
+```
+#### 2) cmake
+```
+mkdir build && cd build;
+cmake ../
+cmake --build .
+```
 
 **Technology Stack:**
 * Qt
@@ -61,13 +67,13 @@ Detail usage will be shown via video [to be uploaded soon].
 * QML
 
 
-### REST requests (for advance users)
+#### REST requests (for advance users)
 If you want to create a client application for this server you can use 
 [REST/json](https://www.codecademy.com/article/what-is-rest) protocol to interact with the server.
 [REST/json](https://www.codecademy.com/article/what-is-rest) is choose for its simplicity, scalability & statelessness.
 
  
-### Client --> Server
+#### Client --> Server
 
 1: Alive signal (*signal serves as a heartbeat, indicating the client's active status*)
 ```
@@ -126,7 +132,7 @@ If you want to create a client application for this server you can use
 }
 ```
 
-### Server --> Client
+#### Server --> Client
 1: Shell (*server is sending "whoami" command to the client*)
 ```
 {
@@ -210,7 +216,7 @@ This application is designed for personal and administrative use. It is not inte
 The author disclaims all liability for any misuse or damage caused by the application. Users are solely responsible for their actions and the consequences thereof.
 
 
-## Contributing
+### Contributing
 
 Pull requests are welcome. For major changes, please open an issue first
 to discuss what you would like to change.
