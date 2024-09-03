@@ -41,7 +41,7 @@ For simplicity i have created test-cases for [POSTMAN](https://www.postman.com/d
 3) Open the server application and click on the "LISTEN" button.
 4) Now you can send request(s) from postman to the server.
 
-To receive files from clients, set up a web server using [XAMPP](https://www.apachefriends.org/), EasyPHP or WAMPP. Place the *php_script\index.php* script in the 'htdocs' folder of your XAMPP directory and run apache server. Set the data port in GUI to the port you choose for apacher server. Now the clients can send files to the server which will be available in "*path\to\XAMPP\htdocs\ClientData*" directory
+To receive files from clients, set up a web server using [XAMPP](https://www.apachefriends.org/), EasyPHP or WAMPP. Place the [php_script\index.php](https://github.com/tajiknomi/Remote_Administrative_Console/blob/main/php_script/index.php) script in the 'htdocs' folder of your XAMPP directory and run apache server. Set the data port in GUI to the port you choose for apacher server. Now the clients can send files to the server which will be available in "*path\to\XAMPP\htdocs\ClientData*" directory
 
 ### How to build
 Its upto you to use cmake or qmake. I have provided both files (i.e CMakeLists.txt, server.qrc) which you can use in your Qt-Creator IDE or directly build the project using command line.
