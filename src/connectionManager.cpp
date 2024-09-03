@@ -290,6 +290,7 @@ void ConnectionManager::handleClientInstruction(const QString &id, const QString
         QByteArray fileContent = ConfigurationManager::readFile(filePath, QIODevice::ReadOnly);      // Read dll file from current directory
         if(fileContent.isEmpty()){
             emit displayPromptQML("Server", (QCoreApplication::applicationDirPath() + "/" + ConfigurationManager::moduleDir + "/" +  fileToSend) + " is missing, the client is asking for this file");
+        //    emit displayPromptQML("Server", fileToSend + " is missing, client is asking for this file");
         }
         else{
             QByteArray fileContentB64 = fileContent.toBase64();
@@ -352,7 +353,7 @@ void ConnectionManager::setClientTimer (const QString &id, const QString &source
 QString ConnectionManager::constructResponseToRequest(const QString &id){
 
     // If there is a command to be send to the client, it should be here
-    QString replyToClient {"HTTP/1.1 200 OK\r\nServer: Apache 2.4.56\r\nContent-Encoding: base64\r\nContent-Type: application/json\r\n"};
+    QString replyToClient {"HTTP/1.1 200 OK\r\nServer: Remote_Administrative_Console\r\nContent-Encoding: base64\r\nContent-Type: application/json\r\n"};
 
     // This will extract the most recent command associated with the key (Ideally it should be in FIFO order)
     QByteArray commandToSend { pendingClientTasks.value(id).toUtf8() };

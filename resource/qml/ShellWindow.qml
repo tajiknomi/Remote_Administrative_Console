@@ -115,7 +115,7 @@ Window {
 
         TextInput {
             id: cmdInput
-            text: "dir E:\\"
+            text: "whoami"
             font.pixelSize: shell_rect.height/30
             selectByMouse: true
             anchors.fill: parent
