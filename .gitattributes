@@ -1,0 +1,20 @@
+# Classify C++ source files
+*.cpp linguist-language=C++
+*.hpp linguist-language=C++
+*.cc linguist-language=C++
+*.hh linguist-language=C++
+*.h linguist-language=C++
+*.cxx linguist-language=C++
+*.hxx linguist-language=C++
+
+# Classify QML files
+*.qml linguist-language=QML
+
+# Classify Qt-related files (optional, set as C++ if relevant)
+*.pro linguist-language=C++
+*.ui linguist-language=XML
+*.pri linguist-language=C++
+
+# Classify other Qt-specific files as needed
+*.qrc linguist-language=XML
+*.moc linguist-language=C++
