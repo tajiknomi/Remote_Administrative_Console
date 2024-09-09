@@ -1,4 +1,4 @@
-# Classify C++ source files
+# Force C++ to be the primary language by setting a higher weight
 *.cpp linguist-language=C++
 *.hpp linguist-language=C++
 *.cc linguist-language=C++
@@ -6,15 +6,16 @@
 *.h linguist-language=C++
 *.cxx linguist-language=C++
 *.hxx linguist-language=C++
+*.inl linguist-language=C++
 
-# Classify QML files
+# Set QML files as QML but do not change the overall project language
 *.qml linguist-language=QML
 
-# Classify Qt-related files (optional, set as C++ if relevant)
+# Qt-related files classified but set as low impact
 *.pro linguist-language=C++
-*.ui linguist-language=XML
 *.pri linguist-language=C++
-
-# Classify other Qt-specific files as needed
+*.ui linguist-language=XML
 *.qrc linguist-language=XML
-*.moc linguist-language=C++
+
+# Reduce the QML impact on overall language stats
+*.qml linguist-detectable=false
