@@ -5,6 +5,7 @@ C2 Framework for administration of clients via [REST API](https://www.redhat.com
 
 ![Alt text](/screenshots/2.JPG?raw=true "Optional Title")
 
+
 ### Features
 **1: System Information:** Gain insights into the system by viewing details like operating system, hardware specifications, and software versions.
 
@@ -25,8 +26,23 @@ C2 Framework for administration of clients via [REST API](https://www.redhat.com
 **9: Logging:** Track client/server activity and events for troubleshooting.
 
 
+
+## Quick Start
+
+Download the [latest release](https://github.com/tajiknomi/Remote_Administrative_Console/releases) and run the application. This app acts like a webserver API, so you need client app/service to interact with it. You can use ready-to-use [windows client](https://github.com/tajiknomi/ClientHTTP_windows/releases) / [Linux client](https://github.com/tajiknomi/ClientHTTP_linux/releases).
+
+You also need a webserver for downloading/uploading functionality. For that you can set up a web server using [XAMPP](https://www.apachefriends.org/), EasyPHP or WAMPP. Place the [php_script\index.php](https://github.com/tajiknomi/Remote_Administrative_Console/blob/main/php_script/index.php) script in the 'htdocs' folder of your XAMPP directory and run apache server. Set the data port in GUI to the port you choose for apache server. Now the clients can send/receive file(s) to the server which will be available in "*path\to\XAMPP\htdocs\ClientData*" directory.
+
+
+#### NOTE for Linux
+Before running server on linux, ensure the following dependencies are installed:
+
+```
+sudo apt install libxcb-cursor0 libgl1-mesa-dev libglu1-mesa-dev mesa-utils -y
+```
+
 ### Usage
-Download the [latest release](https://github.com/tajiknomi/Remote_Administrative_Console/releases) and run the application. This app acts like a webserver API, so you need client app/service to interact with it. You have three options available:-
+This app act like a REST API, you have three options available for interactivity:-
 
 1: You can use my client app/service like C++ based [windows client](https://github.com/tajiknomi/ClientHTTP_windows/releases) / [Linux client](https://github.com/tajiknomi/ClientHTTP_linux/releases).
 
@@ -34,14 +50,12 @@ Download the [latest release](https://github.com/tajiknomi/Remote_Administrative
 
 3: Create your own app/service to interact with the servcer (by following the [protocol](https://github.com/tajiknomi/Remote_Administrative_Console/edit/main/README.md#rest-requests-for-advance-users) ) 
 
-
-For simplicity i have created test-cases for [POSTMAN](https://www.postman.com/downloads/) i.e. "postman\TestCases.json". To use the compiled testcases, you can:-
+For simplicity I have created test-cases for [POSTMAN](https://www.postman.com/downloads/) i.e. "postman\TestCases.json". To use the compiled testcases, you can:-
 1) Import the **postman\\TestCases.json** in your postman app or its web-interface.
 2) edit --> Variables --> baseUrl. Set the value of baseUrl to your own ip address.
 3) Open the server application and click on the "LISTEN" button.
 4) Now you can send request(s) from postman to the server.
 
-To receive files from clients, set up a web server using [XAMPP](https://www.apachefriends.org/), EasyPHP or WAMPP. Place the [php_script\index.php](https://github.com/tajiknomi/Remote_Administrative_Console/blob/main/php_script/index.php) script in the 'htdocs' folder of your XAMPP directory and run apache server. Set the data port in GUI to the port you choose for apacher server. Now the clients can send files to the server which will be available in "*path\to\XAMPP\htdocs\ClientData*" directory
 
 ### How to build
 Its upto you to use cmake or qmake. I have provided both files (i.e CMakeLists.txt, server.qrc) which you can use in your Qt-Creator IDE or directly build the project using command line.
