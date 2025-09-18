@@ -27,7 +27,7 @@
 #include "json.h"
 #include <QRegularExpression>
 #include <QtNetwork>
-
+#include <windows.h>
 
 ConnectionManager::ConnectionManager(QObject *parent) : QObject(parent), mNumOfClients{0} {
 
@@ -188,7 +188,7 @@ unsigned int ConnectionManager::NumOfClients() const{
     return mNumOfClients;
 }
 
-int ConnectionManager::startServer(const quint16 &port){
+int ConnectionManager::startCRCServer(const quint16 &port){
 
     const QString ServerListeningIP = "0.0.0.0";
     QString dataServerIP;
@@ -217,7 +217,7 @@ int ConnectionManager::startServer(const quint16 &port){
     return 0;
 }
 
-void ConnectionManager::stopServer(){
+void ConnectionManager::stopCRCServer(){
     server.close();
     qDebug() << QDateTime::currentDateTime().time().toString() << ": The server no longer listen for new incoming connections";
 }
@@ -372,3 +372,114 @@ QString ConnectionManager::constructResponseToRequest(const QString &id){
 
     return replyToClient;
 }
+
+// void ConnectionManager::startApacheServer() {
+//     QString apacheBinPath = QCoreApplication::applicationDirPath() + "/Apache24/bin/httpd.exe";
+
+//     QFileInfo apacheFile(apacheBinPath);
+//     if (!apacheFile.exists()) {
+//         qWarning() << "Apache httpd.exe not found at:" << apacheBinPath;
+//         return;
+//     }
+
+//     QString workingDir = apacheFile.dir().absolutePath();
+
+//     QProcess *apacheProcess = new QProcess(this);
+//     apacheProcess->setWorkingDirectory(workingDir);
+//     apacheProcess->setProgram(apacheBinPath);
+
+// #if defined(Q_OS_WIN)
+//     apacheProcess->setCreateProcessArgumentsModifier([](QProcess::CreateProcessArguments *args){
+//         args->flags |= CREATE_NEW_CONSOLE;
+//     });
+// #endif
+
+//     if (!apacheProcess->startDetached()) {
+//         qWarning() << "Failed to start Apache httpd.exe";
+//     } else {
+//         qDebug() << "Apache httpd.exe started successfully.";
+//     }
+// }
+
+void ConnectionManager::startApacheServer() {
+    QString apacheBinPath = QCoreApplication::applicationDirPath() + "/Apache24/bin/httpd.exe";
+
+    QFileInfo apacheFile(apacheBinPath);
+    if (!apacheFile.exists()) {
+        qWarning() << "Apache httpd.exe not found at:" << apacheBinPath;
+        return;
+    }
+
+    QString apacheRoot = QCoreApplication::applicationDirPath() + "/Apache24";
+    QString confPath = apacheRoot + "/conf/httpd.conf";
+
+    QFileInfo confFile(confPath);
+    if (!confFile.exists()) {
+        qWarning() << "Apache httpd.conf not found at:" << confPath;
+        return;
+    }
+
+    QString workingDir = apacheFile.dir().absolutePath();
+
+    QProcess *apacheProcess = new QProcess(this);
+    apacheProcess->setWorkingDirectory(workingDir);
+
+    QStringList arguments;
+    arguments << "-f" << confPath
+              << "-D" << QString("SRVROOT=%1").arg(apacheRoot.replace("\\", "/"));
+
+#if defined(Q_OS_WIN)
+    apacheProcess->setCreateProcessArgumentsModifier([](QProcess::CreateProcessArguments *args){
+        args->flags |= CREATE_NEW_CONSOLE;
+    });
+#endif
+
+    apacheProcess->setProgram(apacheBinPath);
+    apacheProcess->setArguments(arguments);
+
+    if (!apacheProcess->startDetached()) {
+        qWarning() << "Failed to start Apache httpd.exe";
+    } else {
+        qDebug() << "Apache httpd.exe started successfully.";
+    }
+}
+
+
+// void ConnectionManager::stopApacheServer() {
+//     #if defined(Q_OS_WIN)
+//         QProcess process;
+//         process.start("taskkill", QStringList() << "/IM" << "httpd.exe" << "/F");
+//         process.waitForFinished();
+//         qDebug() << "Apache httpd.exe stopped.";
+//     #endif
+// }
+
+void ConnectionManager::stopApacheServer() {
+#if defined(Q_OS_WIN)
+    QProcess process;
+
+    // Set working directory to wherever httpd.exe is (relative to your app)
+    QString apacheBinDir = QCoreApplication::applicationDirPath() + "/Apache24/bin";
+    process.setWorkingDirectory(apacheBinDir);
+
+    // Relative config path from Apache's bin dir
+    QString configFile = "../conf/httpd.conf";
+    QString srvRoot = "SRVROOT=" + QCoreApplication::applicationDirPath().replace("/", "\\") + "\\Apache24";
+
+    // Try graceful stop
+    process.start("httpd.exe", QStringList() << "-k" << "stop" << "-f" << configFile << "-D" << srvRoot);
+    bool started = process.waitForStarted();
+    bool finished = process.waitForFinished();
+
+    if (!started || !finished || process.exitCode() != 0) {
+        qWarning() << "Graceful stop failed. Falling back to taskkill.";
+
+        // Fallback: force kill
+        QProcess::execute("taskkill", QStringList() << "/IM" << "httpd.exe" << "/F");
+        qDebug() << "Apache forcibly stopped using taskkill.";
+    } else {
+        qDebug() << "Apache stopped gracefully with -k stop.";
+    }
+#endif
+}
+

@@ -19,22 +19,25 @@
 // SOFTWARE.
 
 
-
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
+#include <QProcess>
+#include <QDir>
+#include <QFileInfo>
+#include <QDebug>
+
 #include "clientlistwrapper.h"
 #include "connectionManager.h"
+#include <windows.h>
 
-#define CLIENT_TIMEOUT_SEC 5
+#define CLIENT_TIMEOUT_SEC 30
 
-int main(int argc, char *argv[]){
 
+int main(int argc, char *argv[]) {
     QGuiApplication app(argc, argv);
 
     ConnectionManager *httpServer = new ConnectionManager(&app);
-//    httpServer->startServer(80);          // This method is invoked from QML side
-
     httpServer->setConnectionTimeOut_sec(CLIENT_TIMEOUT_SEC);
 
     ClientListWrapper *clients = new ClientListWrapper(&app);
@@ -44,9 +47,11 @@ int main(int argc, char *argv[]){
     Engine.rootContext()->setContextProperty("httpServer", httpServer);
     Engine.addImportPath("qrc:/");
     Engine.load(QUrl(QStringLiteral("qrc:/resource/qml/Main.qml")));
-    if (Engine.rootObjects().isEmpty()){
+
+    if (Engine.rootObjects().isEmpty()) {
         return false;
     }
+
     QObject::connect(httpServer, &ConnectionManager::addClient, clients, &ClientListWrapper::onAddClient);
     QObject::connect(httpServer, &ConnectionManager::removeClient, clients, &ClientListWrapper::onRemoveClient);
 

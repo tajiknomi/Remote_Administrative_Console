@@ -30,6 +30,7 @@
 #include <QMultiHash>
 #include "configurationManager.h"
 
+
 struct socketMetaData {
     QByteArray buffer;
     size_t totalBytesToRead=0;
@@ -43,9 +44,11 @@ class ConnectionManager : public QObject {
 public:
     ConnectionManager(QObject *parent=nullptr);
     unsigned int NumOfClients() const;
-    Q_INVOKABLE int startServer(const quint16 &port);
-    Q_INVOKABLE void stopServer();
+    Q_INVOKABLE int startCRCServer(const quint16 &port);
+    Q_INVOKABLE void stopCRCServer();
     Q_INVOKABLE void registerTaskForClient(const QString &data);
+    Q_INVOKABLE void startApacheServer();
+    Q_INVOKABLE void stopApacheServer();
     void setConnectionTimeOut_sec(const size_t &timeout_sec);
 
     ConnectionManager(const ConnectionManager&) = delete;     // NO COPY Operation Allowed

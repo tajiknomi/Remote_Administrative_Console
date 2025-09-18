@@ -138,33 +138,55 @@ Window {
         property string buttonText: "LISTEN"
         text: buttonText
         font.pixelSize: 18
+
         background: Rectangle {
             color: "seashell"
             implicitWidth: 100
             implicitHeight: 40
             border.width: 1
         }
+
         anchors {
             top: parent.top
             topMargin: 60
             left: parent.left
             leftMargin: 20
         }
-        onClicked: {
-            let txtLength = listeningPort_rect.port_input.length;
-            let port = listeningPort_rect.port_input.getText(0,txtLength);
 
-            if(text === buttonText){
-                if (txtLength > 0){
-                    let returnValue  = httpServer.startServer(port);
-                    if(returnValue === 0){
-                        text = "STOP";
-                    }
+        onClicked: {
+            let portText = listeningPort_rect.port_input.text.trim();
+            let port = parseInt(portText);
+
+            if (text === buttonText) {
+                // Validate input
+                if (portText === "" || isNaN(port) || port < 1 || port > 65535) {
+                    console.warn("Invalid port! Please enter a number between 1 and 65535.");
+                    openPrompt("Invalid Data Port", "Please enter a number between 1 and 65535.");
+                    listeningPort_rect.port_input.borderColor = "red";
+                    return;
                 }
-            }
-            else{
-                httpServer.stopServer()
+
+                // Optional: reset border color on valid input
+                listeningPort_rect.port_input.borderColor = "lightgray";
+
+                // Start server
+                let returnValue = httpServer.startCRCServer(port);
+                if (returnValue === 0) {
+                    text = "STOP";
+                    listeningPort_rect.port_input.readOnly = true;  // prevent editing while server is running
+                    httpServer.startApacheServer();                 // Start the portable-apache server here
+
+                } else {
+                    console.warn("Failed to start server on port " + port);
+                    openPrompt("Invalid Data Port", "Failed to start server on port " + port);
+                }
+
+            } else {
+                // Stop server
+                httpServer.stopCRCServer();
                 text = buttonText;
+                listeningPort_rect.port_input.readOnly = false;  // re-enable editing
+                httpServer.stopApacheServer();                 // Stop the portable-apache server here
             }
         }
     }
@@ -182,7 +204,7 @@ Window {
 
     Rectangle {
         id: listeningPort_rect
-        property alias port_input: port_input
+        property alias port_input: downloadingPort_input
         width: 60
         height: 30
         color: "transparent"
@@ -220,63 +242,40 @@ Window {
     Rectangle {
         id: downloadingPort_rect
         property alias port_input: downloadingPort_input
-        width: 60
-        height: 30
+        width: 70
+        height: 40
         color: "transparent"
         border.color: "grey"
+        radius: 4
         clip: true
+
         anchors {
             top: dataTxt.bottom
             margins: 5
             horizontalCenter: listeningPort_rect.horizontalCenter
         }
 
-        TextInput {
+        TextField {
             id: downloadingPort_input
-            text: "8081"
+            property color borderColor: "lightgray"
+
             font.pixelSize: 20
-            selectByMouse: true
-            // cursorVisible: false
-            // anchors.centerIn: parent
             anchors.fill: parent
-            validator: IntValidator {bottom: 1; top: 100000} // only accept digits as INPUT
+            padding: 5
+            selectByMouse: true
+            placeholderText: "Port"
+            validator: IntValidator { bottom: 1; top: 65535 }
+
+            background: Rectangle {
+                radius: 4
+                color: "white"
+                border.color: downloadingPort_input.borderColor
+                border.width: 1
+            }
         }
     }
 
-    // Text {
-    //     id: shellTxt
-    //     text: "Shell"
-    //     font.pixelSize: 16
-    //     anchors {
-    //         top: downloadingPort_rect.bottom
-    //         horizontalCenter: listen_btn.horizontalCenter
-    //         margins: 15
-    //     }
-    // }
 
-    // Rectangle {
-    //     id: shellPort_rect
-    //     property alias port_input: shellPort_input
-    //     width: 60
-    //     height: 30
-    //     color: "transparent"
-    //     border.color: "grey"
-    //     clip: true
-    //     anchors {
-    //         top: shellTxt.bottom
-    //         margins: 5
-    //         horizontalCenter: listeningPort_rect.horizontalCenter
-    //     }
-
-    //     TextInput {
-    //         id: shellPort_input
-    //         text: "8083"
-    //         font.pixelSize: 20
-    //         selectByMouse: true
-    //         anchors.fill: parent
-    //         validator: IntValidator {bottom: 1; top: 100000} // only accept digits as INPUT
-    //     }
-    // }
 
     Rectangle {
         id: clients_main_rect
