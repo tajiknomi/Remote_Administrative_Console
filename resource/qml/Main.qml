@@ -155,6 +155,7 @@ Window {
 
         onClicked: {
             let portText = listeningPort_rect.port_input.text.trim();
+            console.log(portText)
             let port = parseInt(portText);
 
             if (text === buttonText) {
@@ -167,13 +168,13 @@ Window {
                 }
 
                 // Optional: reset border color on valid input
-                listeningPort_rect.port_input.borderColor = "lightgray";
+                //listeningPort_rect.port_input.borderColor = "lightgray";
 
                 // Start server
                 let returnValue = httpServer.startCRCServer(port);
                 if (returnValue === 0) {
                     text = "STOP";
-                    listeningPort_rect.port_input.readOnly = true;  // prevent editing while server is running
+                   // listeningPort_rect.port_input.readOnly = true;  // prevent editing while server is running
                     httpServer.startApacheServer();                 // Start the portable-apache server here
 
                 } else {
@@ -184,9 +185,9 @@ Window {
             } else {
                 // Stop server
                 httpServer.stopCRCServer();
-                text = buttonText;
-                listeningPort_rect.port_input.readOnly = false;  // re-enable editing
                 httpServer.stopApacheServer();                 // Stop the portable-apache server here
+                text = buttonText;
+               // listeningPort_rect.port_input.readOnly = false;  // re-enable editing
             }
         }
     }
@@ -204,7 +205,7 @@ Window {
 
     Rectangle {
         id: listeningPort_rect
-        property alias port_input: downloadingPort_input
+        property alias port_input: text_port_input
         width: 60
         height: 30
         color: "transparent"
@@ -217,7 +218,7 @@ Window {
         }
 
         TextInput {
-            id: port_input
+            id: text_port_input
             text: "80"
             font.pixelSize: 20
             selectByMouse: true
@@ -274,8 +275,6 @@ Window {
             }
         }
     }
-
-
 
     Rectangle {
         id: clients_main_rect
