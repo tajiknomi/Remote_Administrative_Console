@@ -22,14 +22,9 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
-#include <QProcess>
-#include <QDir>
-#include <QFileInfo>
-#include <QDebug>
-
 #include "clientlistwrapper.h"
 #include "connectionManager.h"
-#include <windows.h>
+
 
 #define CLIENT_TIMEOUT_SEC 30
 

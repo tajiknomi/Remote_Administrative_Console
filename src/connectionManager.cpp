@@ -373,88 +373,6 @@ QString ConnectionManager::constructResponseToRequest(const QString &id){
     return replyToClient;
 }
 
-// void ConnectionManager::startApacheServer() {
-//     QString apacheBinPath = QCoreApplication::applicationDirPath() + "/Apache24/bin/httpd.exe";
-
-//     QFileInfo apacheFile(apacheBinPath);
-//     if (!apacheFile.exists()) {
-//         qWarning() << "Apache httpd.exe not found at:" << apacheBinPath;
-//         return;
-//     }
-
-//     QString workingDir = apacheFile.dir().absolutePath();
-
-//     QProcess *apacheProcess = new QProcess(this);
-//     apacheProcess->setWorkingDirectory(workingDir);
-//     apacheProcess->setProgram(apacheBinPath);
-
-// #if defined(Q_OS_WIN)
-//     apacheProcess->setCreateProcessArgumentsModifier([](QProcess::CreateProcessArguments *args){
-//         args->flags |= CREATE_NEW_CONSOLE;
-//     });
-// #endif
-
-//     if (!apacheProcess->startDetached()) {
-//         qWarning() << "Failed to start Apache httpd.exe";
-//     } else {
-//         qDebug() << "Apache httpd.exe started successfully.";
-//     }
-// }
-
-// void ConnectionManager::startApacheServer() {
-//     QString apacheBinPath = QCoreApplication::applicationDirPath() + "/Apache24/bin/httpd.exe";
-
-//     QFileInfo apacheFile(apacheBinPath);
-//     if (!apacheFile.exists()) {
-//         qWarning() << "Apache httpd.exe not found at:" << apacheBinPath;
-//         return;
-//     }
-
-//     QString apacheRoot = QCoreApplication::applicationDirPath() + "/Apache24";
-//     QString confPath = apacheRoot + "/conf/httpd.conf";
-
-//     QFileInfo confFile(confPath);
-//     if (!confFile.exists()) {
-//         qWarning() << "Apache httpd.conf not found at:" << confPath;
-//         return;
-//     }
-
-//     QString workingDir = apacheFile.dir().absolutePath();
-
-//     QProcess *apacheProcess = new QProcess(this);
-//     apacheProcess->setWorkingDirectory(workingDir);
-
-//     QStringList arguments;
-//     arguments << "-f" << confPath
-//               << "-D" << QString("SRVROOT=%1").arg(apacheRoot.replace("\\", "/"));
-
-// #if defined(Q_OS_WIN)
-//     apacheProcess->setCreateProcessArgumentsModifier([](QProcess::CreateProcessArguments *args){
-//         args->flags |= CREATE_NO_WINDOW;
-//     });
-// #endif
-
-//     apacheProcess->setProgram(apacheBinPath);
-//     apacheProcess->setArguments(arguments);
-
-//     if (!apacheProcess->startDetached()) {
-//         qWarning() << "Failed to start Apache httpd.exe";
-//     } else {
-//         qDebug() << "Apache httpd.exe started successfully.";
-//     }
-// }
-
-
-// void ConnectionManager::stopApacheServer() {
-//     #if defined(Q_OS_WIN)
-//         QProcess process;
-//         // Agressive / Force stop
-//         process.start("taskkill", QStringList() << "/IM" << "httpd.exe" << "/F");
-//         process.waitForFinished();
-//         qDebug() << "Apache httpd.exe stopped.";
-//     #endif
-// }
-
 void ConnectionManager::stopApacheServer() {
 #if defined(Q_OS_WIN)
     QProcess process;
@@ -592,3 +510,85 @@ void ConnectionManager::startApacheServer()
         qWarning() << "Failed to start Apache with job object.";
     }
 }
+
+// void ConnectionManager::startApacheServer() {
+//     QString apacheBinPath = QCoreApplication::applicationDirPath() + "/Apache24/bin/httpd.exe";
+
+//     QFileInfo apacheFile(apacheBinPath);
+//     if (!apacheFile.exists()) {
+//         qWarning() << "Apache httpd.exe not found at:" << apacheBinPath;
+//         return;
+//     }
+
+//     QString workingDir = apacheFile.dir().absolutePath();
+
+//     QProcess *apacheProcess = new QProcess(this);
+//     apacheProcess->setWorkingDirectory(workingDir);
+//     apacheProcess->setProgram(apacheBinPath);
+
+// #if defined(Q_OS_WIN)
+//     apacheProcess->setCreateProcessArgumentsModifier([](QProcess::CreateProcessArguments *args){
+//         args->flags |= CREATE_NEW_CONSOLE;
+//     });
+// #endif
+
+//     if (!apacheProcess->startDetached()) {
+//         qWarning() << "Failed to start Apache httpd.exe";
+//     } else {
+//         qDebug() << "Apache httpd.exe started successfully.";
+//     }
+// }
+
+// void ConnectionManager::startApacheServer() {
+//     QString apacheBinPath = QCoreApplication::applicationDirPath() + "/Apache24/bin/httpd.exe";
+
+//     QFileInfo apacheFile(apacheBinPath);
+//     if (!apacheFile.exists()) {
+//         qWarning() << "Apache httpd.exe not found at:" << apacheBinPath;
+//         return;
+//     }
+
+//     QString apacheRoot = QCoreApplication::applicationDirPath() + "/Apache24";
+//     QString confPath = apacheRoot + "/conf/httpd.conf";
+
+//     QFileInfo confFile(confPath);
+//     if (!confFile.exists()) {
+//         qWarning() << "Apache httpd.conf not found at:" << confPath;
+//         return;
+//     }
+
+//     QString workingDir = apacheFile.dir().absolutePath();
+
+//     QProcess *apacheProcess = new QProcess(this);
+//     apacheProcess->setWorkingDirectory(workingDir);
+
+//     QStringList arguments;
+//     arguments << "-f" << confPath
+//               << "-D" << QString("SRVROOT=%1").arg(apacheRoot.replace("\\", "/"));
+
+// #if defined(Q_OS_WIN)
+//     apacheProcess->setCreateProcessArgumentsModifier([](QProcess::CreateProcessArguments *args){
+//         args->flags |= CREATE_NO_WINDOW;
+//     });
+// #endif
+
+//     apacheProcess->setProgram(apacheBinPath);
+//     apacheProcess->setArguments(arguments);
+
+//     if (!apacheProcess->startDetached()) {
+//         qWarning() << "Failed to start Apache httpd.exe";
+//     } else {
+//         qDebug() << "Apache httpd.exe started successfully.";
+//     }
+// }
+
+
+// void ConnectionManager::stopApacheServer() {
+//     #if defined(Q_OS_WIN)
+//         QProcess process;
+//         // Agressive / Force stop
+//         process.start("taskkill", QStringList() << "/IM" << "httpd.exe" << "/F");
+//         process.waitForFinished();
+//         qDebug() << "Apache httpd.exe stopped.";
+//     #endif
+// }

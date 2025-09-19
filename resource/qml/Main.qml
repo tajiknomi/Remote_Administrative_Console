@@ -259,7 +259,7 @@ Window {
         TextField {
             id: downloadingPort_input
             property color borderColor: "lightgray"
-
+            text: "8081"
             font.pixelSize: 20
             anchors.fill: parent
             padding: 5
@@ -464,7 +464,7 @@ Window {
                     Dialog2 {
                         id: upload_dialog_id
                         title: "Upload item"
-                        txt1: "Source Path (e.g. packages/file.txt)"
+                        txt1: "Source Path (e.g. uploads/sample.txt)"
                         txt2: "Destination Path (e.g. c:/programdata/data/)"
                         upload_dialog.onAccepted: {
                             let id = modelData.id
