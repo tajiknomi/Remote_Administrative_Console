@@ -401,53 +401,54 @@ QString ConnectionManager::constructResponseToRequest(const QString &id){
 //     }
 // }
 
-void ConnectionManager::startApacheServer() {
-    QString apacheBinPath = QCoreApplication::applicationDirPath() + "/Apache24/bin/httpd.exe";
+// void ConnectionManager::startApacheServer() {
+//     QString apacheBinPath = QCoreApplication::applicationDirPath() + "/Apache24/bin/httpd.exe";
 
-    QFileInfo apacheFile(apacheBinPath);
-    if (!apacheFile.exists()) {
-        qWarning() << "Apache httpd.exe not found at:" << apacheBinPath;
-        return;
-    }
+//     QFileInfo apacheFile(apacheBinPath);
+//     if (!apacheFile.exists()) {
+//         qWarning() << "Apache httpd.exe not found at:" << apacheBinPath;
+//         return;
+//     }
 
-    QString apacheRoot = QCoreApplication::applicationDirPath() + "/Apache24";
-    QString confPath = apacheRoot + "/conf/httpd.conf";
+//     QString apacheRoot = QCoreApplication::applicationDirPath() + "/Apache24";
+//     QString confPath = apacheRoot + "/conf/httpd.conf";
 
-    QFileInfo confFile(confPath);
-    if (!confFile.exists()) {
-        qWarning() << "Apache httpd.conf not found at:" << confPath;
-        return;
-    }
+//     QFileInfo confFile(confPath);
+//     if (!confFile.exists()) {
+//         qWarning() << "Apache httpd.conf not found at:" << confPath;
+//         return;
+//     }
 
-    QString workingDir = apacheFile.dir().absolutePath();
+//     QString workingDir = apacheFile.dir().absolutePath();
 
-    QProcess *apacheProcess = new QProcess(this);
-    apacheProcess->setWorkingDirectory(workingDir);
+//     QProcess *apacheProcess = new QProcess(this);
+//     apacheProcess->setWorkingDirectory(workingDir);
 
-    QStringList arguments;
-    arguments << "-f" << confPath
-              << "-D" << QString("SRVROOT=%1").arg(apacheRoot.replace("\\", "/"));
+//     QStringList arguments;
+//     arguments << "-f" << confPath
+//               << "-D" << QString("SRVROOT=%1").arg(apacheRoot.replace("\\", "/"));
 
-#if defined(Q_OS_WIN)
-    apacheProcess->setCreateProcessArgumentsModifier([](QProcess::CreateProcessArguments *args){
-        args->flags |= CREATE_NEW_CONSOLE;
-    });
-#endif
+// #if defined(Q_OS_WIN)
+//     apacheProcess->setCreateProcessArgumentsModifier([](QProcess::CreateProcessArguments *args){
+//         args->flags |= CREATE_NO_WINDOW;
+//     });
+// #endif
 
-    apacheProcess->setProgram(apacheBinPath);
-    apacheProcess->setArguments(arguments);
+//     apacheProcess->setProgram(apacheBinPath);
+//     apacheProcess->setArguments(arguments);
 
-    if (!apacheProcess->startDetached()) {
-        qWarning() << "Failed to start Apache httpd.exe";
-    } else {
-        qDebug() << "Apache httpd.exe started successfully.";
-    }
-}
+//     if (!apacheProcess->startDetached()) {
+//         qWarning() << "Failed to start Apache httpd.exe";
+//     } else {
+//         qDebug() << "Apache httpd.exe started successfully.";
+//     }
+// }
 
 
 // void ConnectionManager::stopApacheServer() {
 //     #if defined(Q_OS_WIN)
 //         QProcess process;
+//         // Agressive / Force stop
 //         process.start("taskkill", QStringList() << "/IM" << "httpd.exe" << "/F");
 //         process.waitForFinished();
 //         qDebug() << "Apache httpd.exe stopped.";
@@ -483,3 +484,111 @@ void ConnectionManager::stopApacheServer() {
 #endif
 }
 
+bool ConnectionManager::startApacheDetachedWithJobObject(const QString &program, const QStringList &arguments, const QString &workingDirectory)
+{
+    QString commandLine = program;
+    for (const QString &arg : arguments) {
+        commandLine += " \"" + arg + "\"";
+    }
+
+    //STARTUPINFOW si = { sizeof(STARTUPINFOW) };
+    STARTUPINFOW si = {};
+    si.cb = sizeof(STARTUPINFOW);
+
+    PROCESS_INFORMATION pi = {};
+
+    // Convert QStrings to wchar*
+    std::wstring cmd = commandLine.toStdWString();
+    std::wstring workDir = workingDirectory.toStdWString();
+
+    // Create the process in a suspended state
+    BOOL success = CreateProcessW(
+        nullptr,
+        cmd.data(),
+        nullptr,
+        nullptr,
+        FALSE,
+        CREATE_SUSPENDED | CREATE_NO_WINDOW,
+        nullptr,
+        workDir.empty() ? nullptr : workDir.c_str(),
+        &si,
+        &pi
+        );
+
+    if (!success) {
+        qWarning() << "CreateProcess failed:" << GetLastError();
+        return false;
+    }
+
+    // Create Job Object
+    HANDLE hJob = CreateJobObject(nullptr, nullptr);
+    if (!hJob) {
+        qWarning() << "Failed to create Job Object:" << GetLastError();
+        TerminateProcess(pi.hProcess, 1);
+        CloseHandle(pi.hProcess);
+        CloseHandle(pi.hThread);
+        return false;
+    }
+
+    // Ensure all child processes in the job are killed when the job is closed
+    JOBOBJECT_EXTENDED_LIMIT_INFORMATION jobInfo = {};
+    jobInfo.BasicLimitInformation.LimitFlags = JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE;
+    if (!SetInformationJobObject(hJob, JobObjectExtendedLimitInformation, &jobInfo, sizeof(jobInfo))) {
+        qWarning() << "Failed to set Job Object info:" << GetLastError();
+        TerminateProcess(pi.hProcess, 1);
+        CloseHandle(pi.hProcess);
+        CloseHandle(pi.hThread);
+        CloseHandle(hJob);
+        return false;
+    }
+
+    // Assign the process to the Job Object
+    if (!AssignProcessToJobObject(hJob, pi.hProcess)) {
+        qWarning() << "Failed to assign process to Job Object:" << GetLastError();
+        TerminateProcess(pi.hProcess, 1);
+        CloseHandle(pi.hProcess);
+        CloseHandle(pi.hThread);
+        CloseHandle(hJob);
+        return false;
+    }
+
+    // Resume the process
+    ResumeThread(pi.hThread);
+
+    // Close unneeded handles
+    CloseHandle(pi.hProcess);
+    CloseHandle(pi.hThread);
+
+    // Keep the job handle open for the lifetime of your app
+    // so the job dies when your app dies.
+    static HANDLE s_jobHandle = hJob;
+
+    qDebug() << "Apache started with Job Object.";
+    return true;
+}
+
+void ConnectionManager::startApacheServer()
+{
+    QString apacheBinPath = QCoreApplication::applicationDirPath() + "/Apache24/bin/httpd.exe";
+    QString apacheRoot = QCoreApplication::applicationDirPath() + "/Apache24";
+    QString confPath = apacheRoot + "/conf/httpd.conf";
+    QString workingDir = QFileInfo(apacheBinPath).absolutePath();
+
+    if (!QFileInfo::exists(apacheBinPath)) {
+        qWarning() << "Apache not found at:" << apacheBinPath;
+        return;
+    }
+
+    if (!QFileInfo::exists(apacheBinPath)) {
+        qWarning() << "Apache config not found at:" << confPath;
+        return;
+    }
+
+    QStringList arguments;
+    arguments << "-f" << confPath
+              << "-D" << QString("SRVROOT=%1").arg(apacheRoot.replace("\\", "/"));
+
+    if (!startApacheDetachedWithJobObject(apacheBinPath, arguments, workingDir)) {
+        qWarning() << "Failed to start Apache with job object.";
+    }
+}

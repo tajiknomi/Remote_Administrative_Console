@@ -88,6 +88,7 @@ private:
     void handleClientInstruction(const QString &id, const QString &sourceIp, const QString destIp, const QString &jsonData);
     void setClientTimer (const QString &id, const QString &sourceIp, const QString &jsonData);
     QString constructResponseToRequest (const QString &id);
+    bool startApacheDetachedWithJobObject(const QString &program, const QStringList &arguments, const QString &workingDirectory);
 };
 
 #endif // CONNECTIONS_H
