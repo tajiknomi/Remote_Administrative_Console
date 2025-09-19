@@ -29,12 +29,36 @@ C2 Framework for administration of clients via [REST API](https://www.redhat.com
 
 ## Quick Start
 
+
+### Windows
+
 Download the [latest release](https://github.com/tajiknomi/Remote_Administrative_Console/releases) and run the application. This app acts like a webserver API, so you need client app/service to interact with it. You can use ready-to-use [windows client](https://github.com/tajiknomi/ClientHTTP_windows/releases) / [Linux client](https://github.com/tajiknomi/ClientHTTP_linux/releases).
+
+Downloaded file(s) from clients will be available at
+```
+RAC_windows-x64\Apache24\htdocs\downloads
+```
+If you want to upload file(s) to client machine, you can use the below directory
+
+```
+RAC_windows-x64\Apache24\htdocs\uploads
+```
+
+The default port for uploading/downloading data is set `8081`, if you want to use some other port for sending/receiving data, you should modify the `Listen 8081` value in
+
+```
+RAC_windows-x64\Apache24\conf\httpd.conf
+```
+
+you should also make sure that the listening port in `httpd.conf` match with the CRC Panel
+
+![Alt text](/screenshots/6.PNG?raw=true "Optional Title")
+
+
+### Linux
 
 You also need a webserver for downloading/uploading functionality. For that you can set up a web server using [XAMPP](https://www.apachefriends.org/), EasyPHP or WAMPP. Place the [php_script\index.php](https://github.com/tajiknomi/Remote_Administrative_Console/blob/main/php_script/index.php) script in the 'htdocs' folder of your XAMPP directory and run apache server. Set the data port in GUI to the port you choose for apache server. Now the clients can send/receive file(s) to the server which will be available in "*path\to\XAMPP\htdocs\ClientData*" directory.
 
-
-#### NOTE for Linux
 Before running server on linux, ensure the following dependencies are installed:
 
 ```
