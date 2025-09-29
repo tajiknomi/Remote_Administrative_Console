@@ -50,7 +50,7 @@ The default port for uploading/downloading data is set `8081`, if you want to us
 RAC_windows-x64\Apache24\conf\httpd.conf
 ```
 
-you should also make sure that the listening port in `httpd.conf` match with the CRC Panel
+you should also make sure that the **data port** in `httpd.conf` match with the CRC Panel
 
 ![Alt text](/screenshots/6.PNG?raw=true "Optional Title")
 
