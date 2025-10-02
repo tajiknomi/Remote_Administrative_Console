@@ -66,13 +66,13 @@ sudo apt install libxcb-cursor0 libgl1-mesa-dev libglu1-mesa-dev mesa-utils -y
 ```
 
 ### Usage
-This app act like a REST API, you have three options available for interactivity:-
+This app act like a REST Server, you have three options available for interactivity:-
 
 1: You can use my client app/service like C++ based [windows client](https://github.com/tajiknomi/ClientHTTP_windows/releases) / [Linux client](https://github.com/tajiknomi/ClientHTTP_linux/releases).
 
 2: For testing API, you can use any tool which can interact with web-api like [POSTMAN](https://www.postman.com/downloads/), [HTTPie](https://httpie.io/), [CURL](https://curl.se/).
 
-3: Create your own app/service to interact with the servcer (by following the [protocol](https://github.com/tajiknomi/Remote_Administrative_Console/edit/main/README.md#rest-requests-for-advance-users) ) 
+3: Create your own app/service to interact with the server (by following the [protocol](https://github.com/tajiknomi/Remote_Administrative_Console/edit/main/README.md#rest-requests-for-advance-users) ) 
 
 For simplicity I have created test-cases for [POSTMAN](https://www.postman.com/downloads/) i.e. "postman\TestCases.json". To use the compiled testcases, you can:-
 1) Import the **postman\\TestCases.json** in your postman app or its web-interface.
